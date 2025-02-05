@@ -156,7 +156,7 @@ export default function Homepage() {
   return (
     <div className="background">
       <div className="main-area">
-        <div className='w-[250px]'>
+        <div className="w-[250px]">
           <svg
             id="Layer_1"
             xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +172,7 @@ export default function Homepage() {
             />
           </svg>
         </div>
-        <div className='w-[350px] mt-6'>
+        <div className="w-[350px] mt-6">
           <RedRoomLogo></RedRoomLogo>
         </div>
         <p
@@ -199,8 +199,8 @@ export default function Homepage() {
             />
           </a>
           <p className="moderat-bold sign-up-text" style={{color: '#FFFAE1'}}>
-            Red Room Bar is part of Printemps new york, For more
-            information sign up for our newsletter
+            Red Room Bar is part of Printemps new york, For more information
+            sign up for our newsletter
           </p>
         </div>
         <form onSubmit={handleSubmit} style={{width: '100%'}}>
