@@ -131,14 +131,14 @@ export default function Homepage() {
       <div className="footer-container">
         <div className="above-footer">
           <a
-            href="https://urlgeni.us/instagram/maisonpasserellenyc"
+            href="https://urlgeni.us/instagram/theredroombar"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Image
-              src="https://cdn.shopify.com/s/files/1/0581/1011/5943/files/IG_LOGO.png?v=1736792345"
+              src="https://cdn.shopify.com/s/files/1/0918/8635/4743/files/F_BLandingPages_IG_Colors-04.png?v=1741379913"
               alt="Instagram Logo"
-              width={42}
+              width={80}
             />
           </a>
           <p className="moderat-bold sign-up-text" style={{color: '#FFFAE1'}}>
