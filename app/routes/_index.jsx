@@ -2,12 +2,12 @@ import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense, useState} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-
+import RedRoomLogo from '~/components/RedRoomLogo';
 /**
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Maison Passerelle'}];
+  return [{title: 'Red Room Bar'}];
 };
 
 /**
@@ -60,7 +60,7 @@ function loadDeferredData({context}) {
 }
 
 export default function Homepage() {
-  const [form, setForm] = useState({email: ''});
+  const [email, setEmail] = useState('');
   const [state, setState] = useState({
     isWaiting: false,
     isSubmitted: false,
@@ -73,82 +73,25 @@ export default function Homepage() {
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
   );
 
-  // NOTE • Clear Input
-  const clearInput = () => {
-    setForm({email: ''});
-  };
-
-  console.log(state);
-
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const email = formData.get('email'); // Correct way to get the email field value
-
-    console.log(formData);
-
-    setState({
-      isWaiting: true,
+    console.log('tirrger');
+    exponea.identify(
+      {email_id: email.toLowerCase()},
+      {
+        email: email.toLowerCase(),
+        data_source: 'restaurant',
+      },
+    );
+    exponea.track('consent', {
+      category: 'email',
+      valid_until: 'unlimited',
+      action: 'accept',
+      data_source: 'restaurant',
     });
-
-    // Validate email before submitting
-    if (validEmail.test(email)) {
-      fetch(url, {
-        headers: {Accept: 'application/json'},
-        method: 'POST',
-        body: formData,
-        // Remove mode: 'no-cors' as it disables response access
-      })
-        .then((response) => {
-          // Check response status
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-
-          setState({
-            isWaiting: false,
-            isSubmitted: true,
-          });
-
-          // Clear form and reset state after a delay
-          setTimeout(() => {
-            clearInput();
-            setState({
-              isWaiting: false,
-              isSubmitted: false,
-            });
-          }, 5000);
-        })
-        .catch((err) => {
-          setState({
-            error: err,
-            isError: true,
-          });
-          console.error('Submission error:', err); // Optionally log the error for debugging
-        });
-    } else {
-      // If the email is not valid, handle the error
-      setState({
-        error: 'Invalid email address',
-        isError: true,
-      });
-    }
-  };
-
-  const handleChange = (e) => {
-    setForm({...form, [e.target.name]: e.target.value});
-  };
-
-  const inputProps = {
-    onChange: handleChange,
-    value: form.email,
-    name: 'email',
-    id: 'email',
-    type: 'email',
-    required: true,
-    placeholder: 'Enter email address',
-    'data-name': 'email',
+    setState({
+      isWaiting: false,
+      isSubmitted: true,
+    });
   };
 
   /** @type {LoaderReturnData} */
@@ -156,24 +99,34 @@ export default function Homepage() {
   return (
     <div className="background">
       <div className="main-area">
-        <Image
-          className="logo"
-          src={
-            'https://cdn.shopify.com/s/files/1/0581/1011/5943/files/MaisonPasser.svg?v=1737053887'
-          }
-          width={'60%'}
-          sizes="(min-width: 35em) 60vw, 70vw"
-          alt="Maison Passerelle Logo"
-        ></Image>
+        <div className="w-[250px]">
+          <svg
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 160.71 160.71"
+            className="w-full h-full"
+          >
+            <defs>
+              <style>{`.cls-1 { fill: #FFFAE1; }`}</style>
+            </defs>
+            <path
+              className="cls-1"
+              d="M147.52,153.44h-45.66c-20.52,0-30.79-15.92-35.8-29.27-1.38-3.68-1.82-7.67-1.29-11.56,3.63-26.73,14.57-43.66,32.6-50.35,13.74-5.09,33.53-5.57,46.78,4.85,8.71,6.85,9.31,17.33,9.31,17.33v63.07c0,3.27-2.65,5.93-5.93,5.93M13.2,153.44c-3.27,0-5.93-2.65-5.93-5.93v-53.68h.05c0-.1-.76-9.76,3.92-15.96,3.18-4.2,9.73-6.21,15.6-4.76,5.47,1.35,10.69,5.26,14.69,11.02,3.78,5.45,6.21,11.92,8.55,18.16l9.16,24.42c4,10.68,9.49,18.92,16.27,24.61.85.72.32,2.1-.79,2.1H13.2ZM7.27,13.2c0-3.27,2.65-5.93,5.93-5.93h40.07c11.03,0,14.6,6.37,15.65,11.72,1.02,5.19.07,10.68-2.63,15.06-5.21,8.47-15.66,11.5-25.77,14.43-2.72.79-5.39,1.56-7.91,2.42-.98.34-2.01.66-3.06,1-6.23,1.99-14.15,4.53-20.22,10.64-.76.76-2.06.24-2.06-.84V13.2ZM94.42,34.04c-2.69-4.38-3.65-9.87-2.63-15.05,1.05-5.34,4.63-11.72,15.65-11.72h40.06c3.27,0,5.93,2.65,5.93,5.93v53.07c-1.36-1.76-2.93-3.4-4.81-4.88-3.13-2.46-6.57-4.39-10.17-5.88v-.02c-2.84-1.4-7.15-3.51-10.35-4.6-2.52-.86-5.19-1.63-7.91-2.42-10.11-2.93-20.56-5.96-25.77-14.43M147.52,0h-40.07c-17.44,0-21.74,12.3-22.79,17.58-1.37,6.96-.07,14.35,3.57,20.27,3.82,6.22,9.51,10.06,15.73,12.79,1.08.48.92,2.03-.24,2.27-3.13.65-6.12,1.51-8.89,2.53-18.76,6.96-31.06,23.88-36.08,49.23l-1.85-4.93c-2.5-6.67-5.09-13.56-9.39-19.76-5.01-7.21-11.73-12.15-18.92-13.93-2.41-.59-4.87-.78-7.29-.62-1.3.09-1.83-1.64-.69-2.26,3.55-1.92,7.43-3.17,11.15-4.36,1.1-.36,2.17-.7,3.19-1.04,2.42-.83,4.98-1.57,7.59-2.32,10.91-3.16,23.26-6.74,29.94-17.6,3.64-5.92,4.94-13.31,3.57-20.27-1.04-5.29-5.35-17.58-22.79-17.58H13.2C5.91,0,0,5.91,0,13.2v134.31c0,7.29,5.91,13.2,13.2,13.2h134.32c7.29,0,13.2-5.91,13.2-13.2V13.2c0-7.29-5.91-13.2-13.2-13.2"
+            />
+          </svg>
+        </div>
+        <div className="w-[350px] mt-6">
+          <RedRoomLogo></RedRoomLogo>
+        </div>
         <p
           className="moderat-bold"
-          style={{fontSize: '1.5rem', color: '#e8d09b'}}
+          style={{fontSize: '.8rem', color: '#FFFAE1'}}
         >
-          Opening March 2025
+          Opening Soon
         </p>
-        <p className="moderat-bold" style={{color: '#e8d09b'}}>
+        {/* <p className="moderat-bold" style={{color: '#FFFAE1'}}>
           One Wall street, NY
-        </p>
+        </p> */}
       </div>
       <div className="footer-container">
         <div className="above-footer">
@@ -188,55 +141,53 @@ export default function Homepage() {
               width={42}
             />
           </a>
-          <p className="moderat-bold sign-up-text" style={{color: '#e8d09b'}}>
-            Maison Passerelle is part of Printemps new york, For more
-            information sign up for our newsletter
+          <p className="moderat-bold sign-up-text" style={{color: '#FFFAE1'}}>
+            Red Room Bar is part of Printemps new york, For more information
+            sign up for our newsletter
           </p>
         </div>
-        <form onSubmit={handleSubmit} style={{width: '100%'}}>
-          {/* Hidden Fields */}
-          <input type="hidden" name="u" value="1" data-name="u" />
-          <input type="hidden" name="f" value="1" data-name="f" />
-          <input type="hidden" name="s" data-name="s" />
-          <input type="hidden" name="c" value="0" data-name="c" />
-          <input type="hidden" name="m" value="0" data-name="m" />
-          <input type="hidden" name="act" value="sub" data-name="act" />
-          <input type="hidden" name="v" value="2" data-name="v" />
-          <div className="footer-area">
+
+        <div className="footer-area">
+          <p
+            className="moderat-bold"
+            style={{fontSize: '14px', color: 'black', marginRight: '8px'}}
+          >
+            {state.isSubmitted ? 'Merci!' : 'Sign up for our newsletter'}
+          </p>
+          {state.isSubmitted ? (
             <p
               className="moderat-bold"
               style={{fontSize: '14px', color: 'black', marginRight: '8px'}}
             >
-              {state.isSubmitted ? 'Merci!' : 'Sign up for our newsletter'}
+              Check your email for updates
             </p>
-            {state.isSubmitted ? (
+          ) : (
+            <input
+              value={email}
+              placeholder="Enter email address"
+              onChange={(e) => setEmail(e.target.value)}
+              className="moderat-bold footer-input bg-white"
+              style={{fontSize: '12px'}}
+            ></input>
+          )}
+          {state.isSubmitted ? (
+            <p></p>
+          ) : (
+            <button
+              className="footer-button"
+              onClick={handleSubmit}
+              disabled={!validEmail.test(email)}
+              style={{cursor: !validEmail.test(email) ? 'auto' : 'pointer'}}
+            >
               <p
                 className="moderat-bold"
-                style={{fontSize: '14px', color: 'black', marginRight: '8px'}}
+                style={{fontSize: '12px', color: 'white'}}
               >
-                Check your email for updates
+                Submit
               </p>
-            ) : (
-              <input
-                {...inputProps}
-                className="moderat-bold footer-input"
-                style={{fontSize: '12px'}}
-              ></input>
-            )}
-            {state.isSubmitted ? (
-              <p></p>
-            ) : (
-              <button className="footer-button">
-                <p
-                  className="moderat-bold"
-                  style={{fontSize: '12px', color: 'white'}}
-                >
-                  Submit
-                </p>
-              </button>
-            )}
-          </div>
-        </form>
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
