@@ -41,6 +41,26 @@ img {
   gap: 12px;
 }
 
+.responsive-icon {
+  width: 250px;
+}
+
+@media (max-width: 640px) {
+  .responsive-icon {
+    width: 150px;
+  }
+}
+
+.responsive-logo {
+  width: 350px;
+}
+
+@media (max-width: 640px) {
+  .responsive-logo {
+    width: 250px;
+  }
+}
+
 .above-footer {
   display: flex;
   flex-direction: column;

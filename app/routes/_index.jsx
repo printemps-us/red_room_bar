@@ -99,7 +99,7 @@ export default function Homepage() {
   return (
     <div className="background">
       <div className="main-area">
-        <div className="w-[250px]">
+        <div className="responsive-icon">
           <svg
             id="Layer_1"
             xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ export default function Homepage() {
             />
           </svg>
         </div>
-        <div className="w-[350px] mt-6">
+        <div className="responsive-logo mt-6">
           <RedRoomLogo></RedRoomLogo>
         </div>
         <p
