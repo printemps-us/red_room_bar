@@ -3,6 +3,8 @@ import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense, useState} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import RedRoomLogo from '~/components/RedRoomLogo';
+import RestaurantModal from '~/components/RestaurantModal';
+import AnimatedButton from '~/components/AnimatedButton';
 /**
  * @type {MetaFunction}
  */
@@ -61,6 +63,7 @@ function loadDeferredData({context}) {
 
 export default function Homepage() {
   const [email, setEmail] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
   const [state, setState] = useState({
     isWaiting: false,
     isSubmitted: false,
@@ -98,6 +101,13 @@ export default function Homepage() {
   const data = useLoaderData();
   return (
     <div className="background">
+      <RestaurantModal
+        setOpenModal={setModalOpen}
+        openModal={modalOpen}
+        venue_id={'87093'}
+        link={'https://resy.com/cities/new-york-ny/venues/red-room-bar'}
+        api_key={'MfrYLpfKWLBWL77fTAsmkZqB9gqZdW64'}
+      ></RestaurantModal>
       <div className="main-area">
         <div className="responsive-icon">
           <svg
@@ -118,12 +128,28 @@ export default function Homepage() {
         <div className="responsive-logo mt-6">
           <RedRoomLogo></RedRoomLogo>
         </div>
-        <p
-          className="moderat-bold"
-          style={{fontSize: '.8rem', color: '#FFFAE1'}}
-        >
-          Opening Soon
-        </p>
+        
+        <div className="mt-10 h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center">
+          <AnimatedButton
+            text={'Book with Resy'}
+            bgColor={'black'}
+            hoverColor={'black'}
+            border="black"
+            onClick={() => setModalOpen(true)}
+            h="42px"
+            w="339px"
+          />
+          {/* <AnimatedButton
+          text={'View Menu'}
+          bgColor={'white'}
+          hoverColor={'#00D072'}
+          clickURL={'/menu'}
+          h="42px"
+          w="339px"
+          arrow
+          arrowStart
+        /> */}
+        </div>
         {/* <p className="moderat-bold" style={{color: '#FFFAE1'}}>
           One Wall street, NY
         </p> */}

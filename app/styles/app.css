@@ -61,6 +61,14 @@ img {
   }
 }
 
+.a-button {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 .above-footer {
   display: flex;
   flex-direction: column;
@@ -87,7 +95,13 @@ img {
   padding: 4px 24px;
   border: 0;
 }
-
+.h3-desktop {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 30px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
 .footer-input {
   padding: 4px 12px;
   width: 250px;
