@@ -11,6 +11,7 @@ function AnimatedButton({
   hoverColor = '#00D072',
   bgColor = 'white',
   border = '#E7E7E7',
+  textColor = 'black',
   w,
   h,
   clickURL,
@@ -149,7 +150,7 @@ function AnimatedButton({
                     ? '#565656'
                     : (bgColor === 'black') | (bgColor === '#000000')
                     ? 'white'
-                    : 'black',
+                    : textColor,
                 }}
               >
                 {text}
@@ -162,7 +163,7 @@ function AnimatedButton({
                   color:
                     (hoverColor === 'black') | (hoverColor === '#000000')
                       ? 'white'
-                      : 'black',
+                      : textColor,
                 }}
               >
                 {text}

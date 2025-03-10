@@ -128,13 +128,24 @@ export default function Homepage() {
         <div className="responsive-logo mt-6">
           <RedRoomLogo></RedRoomLogo>
         </div>
-        
-        <div className="mt-10 h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center">
+        <div className="flex flex-col items-center mt-10">
+          <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+            HOURS
+          </p>
+          <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+            MONDAY - SUNDAY: 11AM-7PM
+          </p>
+          <span className="moderat-bold mt-1" style={{color: '#FFFAE1', fontSize: 12,}}>
+            {'(ENTER THROUGH PRINTEMPS ON BROADWAY AND EXCHANGE PL.)'}
+          </span>
+        </div>
+        <div className="mt-2 h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center">
           <AnimatedButton
             text={'Book with Resy'}
-            bgColor={'black'}
-            hoverColor={'black'}
-            border="black"
+            bgColor={'white'}
+            hoverColor={'white'}
+            border="white"
+            textColor="#DCB243"
             onClick={() => setModalOpen(true)}
             h="42px"
             w="339px"
@@ -150,9 +161,6 @@ export default function Homepage() {
           arrowStart
         /> */}
         </div>
-        {/* <p className="moderat-bold" style={{color: '#FFFAE1'}}>
-          One Wall street, NY
-        </p> */}
       </div>
       <div className="footer-container">
         <div className="above-footer">
