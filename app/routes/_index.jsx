@@ -24,9 +24,9 @@ export async function loader(args) {
 export const meta = ({data}) => {
   // pass your SEO object to getSeoMeta()
   return getSeoMeta({
-    title: 'Red Room Bar - Discover the Menu',
+    title: 'Red Room Bar - Snack, Sip, and Shop! ',
     description:
-      "Explore the Red Room Bar's menu featuring inventive takes on classic cocktails, mocktails and petit bites. ",
+      "An intimate cocktail lounge serving expertly crafted drinks and bar snacks in a warm, inviting space—where you can also browse a selection of gifts, home décor, and objets d’art.",
     // image: data.staticData.seo?.reference.image?.reference?.image.url,
   });
 };
