@@ -1,16 +1,13 @@
 import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense, useState} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
+import {Image, Money, getSeoMeta} from '@shopify/hydrogen';
 import RedRoomLogo from '~/components/RedRoomLogo';
 import RestaurantModal from '~/components/RestaurantModal';
 import AnimatedButton from '~/components/AnimatedButton';
 /**
  * @type {MetaFunction}
  */
-export const meta = () => {
-  return [{title: 'Red Room Bar'}];
-};
 
 /**
  * @param {LoaderFunctionArgs} args
@@ -24,6 +21,15 @@ export async function loader(args) {
 
   return defer({...deferredData, ...criticalData});
 }
+export const meta = ({data}) => {
+  // pass your SEO object to getSeoMeta()
+  return getSeoMeta({
+    title: 'Red Room Bar - Discover the Menu',
+    description:
+      "Explore the Red Room Bar's menu featuring inventive takes on classic cocktails, mocktails and petit bites. ",
+    // image: data.staticData.seo?.reference.image?.reference?.image.url,
+  });
+};
 
 /**
  * Load data necessary for rendering content above the fold. This is the critical data

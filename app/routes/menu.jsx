@@ -1,7 +1,7 @@
 import RedRoomLogo from '~/components/RedRoomLogo';
 import React, {useRef, useState, useEffect} from 'react';
 import {data, useLoaderData, defer} from '@remix-run/react';
-import {Image} from '@shopify/hydrogen';
+import {Image, getSeoMeta} from '@shopify/hydrogen';
 import {Link, useLocation, useNavigate} from '@remix-run/react';
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
@@ -12,7 +12,15 @@ export async function loader(args) {
 
   return defer({...staticData});
 }
-
+export const meta = ({data}) => {
+  // pass your SEO object to getSeoMeta()
+  return getSeoMeta({
+    title: 'Red Room Bar - Printemps New York - Menu',
+    description:
+      'Explore the menu at The Red Room Bar by Chef Gregory Gourdet, featuring inventive cocktails, classic drinks, and refreshing mocktails in a cozy setting.',
+    // image: data.staticData.seo?.reference.image?.reference?.image.url,
+  });
+};
 async function loadStaticData({context}) {
   try {
     // Run the query
@@ -153,9 +161,9 @@ function menu() {
       // Header border animation
       gsap.fromTo(
         roomsHeaderRef.current,
-        {borderBottom: '1px solid white'},
+        {borderBottom: '1px solid #FFFAE1'},
         {
-          borderBottom: '1px solid #E7E7E7',
+          borderBottom: '1px solid #DCB243',
           scrollTrigger: {
             trigger: roomsHeaderRef.current,
             start: '15% 20%',
@@ -227,6 +235,7 @@ function menu() {
         className="flex gap-8 w-full px-8 sticky hide-scrollbar top-[0px] bg-white py-[18px] z-20 overflow-x-scroll"
         style={{
           paddingLeft: `max((100vw - ${nodesWithLinks * 132}px) / 2, 0px)`,
+          backgroundColor: '#FFFAE1',
         }}
       >
         {data?.staticData.content?.references?.nodes?.map((item, index) => (
@@ -240,7 +249,7 @@ function menu() {
                 <div
                   className={`${
                     currentSection == item?.link?.value ? 'border-2' : ''
-                  } border-white-4 h-[100px] p-0.5 rounded-full room w-full`}
+                  } border-[#DCB243] h-[100px] p-0.5 rounded-full room w-full`}
                 >
                   <div className=" rounded-full w-full h-full overflow-hidden ">
                     <Image
