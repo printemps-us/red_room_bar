@@ -7,6 +7,7 @@ import {
   Scripts,
   useRouteError,
   useRouteLoaderData,
+  useNavigate,
   ScrollRestoration,
   isRouteErrorResponse,
 } from '@remix-run/react';
@@ -171,7 +172,6 @@ export function Layout({children}) {
         ) : (
           children
         )}
-        <ScrollRestoration nonce={nonce} />
         <Script src="/bloomreach.js" />
         <Script
           src="https://widgets.resy.com/embed.js"

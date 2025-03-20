@@ -135,7 +135,10 @@ export default function Homepage() {
           <p className="moderat-bold" style={{color: '#FFFAE1'}}>
             MONDAY - SUNDAY: 11AM-7PM
           </p>
-          <span className="moderat-bold mt-1" style={{color: '#FFFAE1', fontSize: 12,}}>
+          <span
+            className="moderat-bold mt-1"
+            style={{color: '#FFFAE1', fontSize: 12}}
+          >
             {'(ENTER THROUGH PRINTEMPS ON BROADWAY AND EXCHANGE PL.)'}
           </span>
         </div>
@@ -150,16 +153,17 @@ export default function Homepage() {
             h="42px"
             w="339px"
           />
-          {/* <AnimatedButton
-          text={'View Menu'}
-          bgColor={'white'}
-          hoverColor={'#00D072'}
-          clickURL={'/menu'}
-          h="42px"
-          w="339px"
-          arrow
-          arrowStart
-        /> */}
+          <AnimatedButton
+            text={'View Menu'}
+            bgColor={'white'}
+            hoverColor={'white'}
+            clickURL={'/menu'}
+            textColor="#DCB243"
+            h="42px"
+            w="339px"
+            arrow
+            arrowStart
+          />
         </div>
       </div>
       <div className="footer-container">
