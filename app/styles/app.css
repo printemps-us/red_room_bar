@@ -61,6 +61,24 @@ img {
   }
 }
 
+.hide-scrollbar {
+  /* For Firefox */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  /* For IE and Edge */
+}
+
+.underline-important {
+  text-decoration: underline !important;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  -webkit-appearance: none;
+  /* For Chrome, Safari, and Opera */
+}
+
 .a-button {
   font-size: 12px;
   font-weight: 600;
@@ -95,6 +113,7 @@ img {
   padding: 4px 24px;
   border: 0;
 }
+
 .h3-desktop {
   font-size: 28px;
   font-weight: 800;
@@ -102,6 +121,7 @@ img {
   letter-spacing: 0;
   text-transform: uppercase;
 }
+
 .footer-input {
   padding: 4px 12px;
   width: 250px;

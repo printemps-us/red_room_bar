@@ -1,16 +1,13 @@
 import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense, useState} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
+import {Image, Money, getSeoMeta} from '@shopify/hydrogen';
 import RedRoomLogo from '~/components/RedRoomLogo';
 import RestaurantModal from '~/components/RestaurantModal';
 import AnimatedButton from '~/components/AnimatedButton';
 /**
  * @type {MetaFunction}
  */
-export const meta = () => {
-  return [{title: 'Red Room Bar'}];
-};
 
 /**
  * @param {LoaderFunctionArgs} args
@@ -24,6 +21,15 @@ export async function loader(args) {
 
   return defer({...deferredData, ...criticalData});
 }
+export const meta = ({data}) => {
+  // pass your SEO object to getSeoMeta()
+  return getSeoMeta({
+    title: 'Red Room Bar - Snack, Sip, and Shop! ',
+    description:
+      "An intimate cocktail lounge serving expertly crafted drinks and bar snacks in a warm, inviting space—where you can also browse a selection of gifts, home décor, and objets d’art.",
+    // image: data.staticData.seo?.reference.image?.reference?.image.url,
+  });
+};
 
 /**
  * Load data necessary for rendering content above the fold. This is the critical data
@@ -135,7 +141,10 @@ export default function Homepage() {
           <p className="moderat-bold" style={{color: '#FFFAE1'}}>
             MONDAY - SUNDAY: 11AM-7PM
           </p>
-          <span className="moderat-bold mt-1" style={{color: '#FFFAE1', fontSize: 12,}}>
+          <span
+            className="moderat-bold mt-1"
+            style={{color: '#FFFAE1', fontSize: 12}}
+          >
             {'(ENTER THROUGH PRINTEMPS ON BROADWAY AND EXCHANGE PL.)'}
           </span>
         </div>
@@ -150,16 +159,17 @@ export default function Homepage() {
             h="42px"
             w="339px"
           />
-          {/* <AnimatedButton
-          text={'View Menu'}
-          bgColor={'white'}
-          hoverColor={'#00D072'}
-          clickURL={'/menu'}
-          h="42px"
-          w="339px"
-          arrow
-          arrowStart
-        /> */}
+          <AnimatedButton
+            text={'View Menu'}
+            bgColor={'white'}
+            hoverColor={'white'}
+            clickURL={'/menu'}
+            textColor="#DCB243"
+            h="42px"
+            w="339px"
+            arrow
+            arrowStart
+          />
         </div>
       </div>
       <div className="footer-container">
