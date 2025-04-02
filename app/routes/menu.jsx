@@ -249,7 +249,7 @@ function menu() {
                 <div
                   className={`${
                     currentSection == item?.link?.value ? 'border-2' : ''
-                  } border-[#DCB243] h-[100px] p-0.5 rounded-full room w-full`}
+                  } border-[#DCB243] h-[100px] w-[100px] p-0.5 rounded-full room`}
                 >
                   <div className=" rounded-full w-full h-full overflow-hidden ">
                     <Image
@@ -297,7 +297,7 @@ function menu() {
             {section.map((item, index) => (
               <div
                 key={`${item?.title?.value}_title_${index}`}
-                className="flex flex-col items-center gap-8"
+                className="flex flex-col items-center gap-8 "
               >
                 <h3 className="h3-desktop pb-3 moderat-bold">
                   {item?.title?.value}
@@ -305,12 +305,12 @@ function menu() {
                 {item?.menu_items?.references?.nodes?.map((item, index) => (
                   <div
                     key={`${item?.title?.value}_item_${index}`}
-                    className="gap-3 flex flex-col items-center"
+                    className="gap-3 flex flex-col items-center w-[90%]"
                   >
-                    <p className="p-standard-bold-desktop uppercase urbanist">
+                    <p className="p-standard-bold-desktop uppercase urbanist text-center">
                       {item.title.value}
                     </p>
-                    <div className="flex urbanist">
+                    <div className="flex urbanist flex-wrap text-center justify-center">
                       {item?.ingredients?.value &&
                         JSON.parse(item?.ingredients?.value).map(
                           (ingredient, index, array) => (
