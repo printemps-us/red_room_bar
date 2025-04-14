@@ -173,6 +173,7 @@ export function Layout({children}) {
           children
         )}
         <Script src="/bloomreach.js" />
+        <Script src="/googleAnalytics.js" />
         <Script
           src="https://widgets.resy.com/embed.js"
           referrerPolicy="no-referrer"
