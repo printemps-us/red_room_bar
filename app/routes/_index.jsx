@@ -139,13 +139,13 @@ export default function Homepage() {
             HOURS
           </p>
           <p className="moderat-bold" style={{color: '#FFFAE1'}}>
-            MONDAY - SUNDAY: 11AM-7PM
+            MONDAY - SUNDAY: 11AM-11PM
           </p>
           <span
             className="moderat-bold mt-1"
             style={{color: '#FFFAE1', fontSize: 12}}
           >
-            {'(ENTER THROUGH PRINTEMPS ON BROADWAY AND EXCHANGE PL.)'}
+            {'(ENTER AT ONE WALL ST AND BROADWAY)'}
           </span>
         </div>
         <div className="mt-2 h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center">
