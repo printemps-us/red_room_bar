@@ -157,7 +157,7 @@ export default function Homepage() {
             textColor="#DCB243"
             onClick={() => setModalOpen(true)}
             h="42px"
-            w="339px"
+            w="100%"
           />
           <AnimatedButton
             text={'View Menu'}
@@ -166,7 +166,8 @@ export default function Homepage() {
             clickURL={'/menu'}
             textColor="#DCB243"
             h="42px"
-            w="339px"
+            w="100%"
+            sx
             arrow
             arrowStart
           />
