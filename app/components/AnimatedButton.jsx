@@ -11,7 +11,8 @@ function AnimatedButton({
   hoverColor = '#00D072',
   bgColor = 'white',
   border = '#E7E7E7',
-  textColor = 'black',
+  hoverBorder,
+  textColor,
   w,
   h,
   clickURL,
@@ -21,6 +22,7 @@ function AnimatedButton({
   textPos = 'center',
   pen = false,
   loading = false,
+  noMaxWidth = false,
 }) {
   const navigate = useNavigate();
   const [isHover, setHover] = useState(false);
@@ -49,8 +51,13 @@ function AnimatedButton({
   }, [isHover]);
   const handleClick = (e) => {
     if (clickURL) {
-      e.preventDefault();
-      navigate(clickURL);
+      if (clickURL.startsWith('/')) {
+        // Internal navigation
+        navigate(clickURL);
+      } else {
+        // External navigation
+        window.open(clickURL, '_blank');
+      }
     }
     if (onClick) {
       e.preventDefault();
@@ -72,9 +79,9 @@ function AnimatedButton({
       style={{
         height: h,
         width: w,
-        maxWidth: '339px',
         borderRadius,
         cursor: disabled ? 'auto' : 'pointer',
+        ...(noMaxWidth ? {} : {maxWidth: '339px'}),
       }}
     >
       <div className="relative h-full">
@@ -151,7 +158,9 @@ function AnimatedButton({
                     ? '#565656'
                     : (bgColor === 'black') | (bgColor === '#000000')
                     ? 'white'
-                    : textColor,
+                    : textColor
+                    ? textColor
+                    : 'black',
                 }}
               >
                 {text}
@@ -164,7 +173,9 @@ function AnimatedButton({
                   color:
                     (hoverColor === 'black') | (hoverColor === '#000000')
                       ? 'white'
-                      : textColor,
+                      : textColor
+                      ? textColor
+                      : 'black',
                 }}
               >
                 {text}
@@ -179,7 +190,7 @@ function AnimatedButton({
         style={{
           borderRadius,
           backgroundColor: hoverColor,
-          borderColor: hoverColor,
+          borderColor: hoverBorder ? hoverBorder : hoverColor,
         }}
         className="absolute border-1 flex items-center px-6 h-full w-full z-20"
       ></div>

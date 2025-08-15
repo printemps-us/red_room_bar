@@ -6,19 +6,17 @@ import {Link, useLocation, useNavigate} from '@remix-run/react';
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import SmoothScroll from '~/components/SmoothScroll';
-
+import FooterComponent from '~/components/FooterComponent';
 export async function loader(args) {
   const staticData = await loadStaticData(args);
 
   return defer({...staticData});
 }
 export const meta = ({data}) => {
-  // pass your SEO object to getSeoMeta()
   return getSeoMeta({
-    title: 'Red Room Bar - Printemps New York - Menu',
-    description:
-      'Explore the menu at The Red Room Bar by Chef Gregory Gourdet, featuring inventive cocktails, classic drinks, and refreshing mocktails in a cozy setting.',
-    // image: data.staticData.seo?.reference.image?.reference?.image.url,
+    title: data?.staticData?.seo?.reference?.title?.value,
+    description: data?.staticData?.seo?.reference?.description?.value,
+    image: data?.staticData?.seo?.reference?.image?.reference?.image?.url,
   });
 };
 async function loadStaticData({context}) {
@@ -28,7 +26,6 @@ async function loadStaticData({context}) {
 
     // Process the result
     const metaobjects = data.metaobjects.nodes[0];
-    console.log('test', metaobjects);
     return {
       staticData: metaobjects,
     };
@@ -40,7 +37,6 @@ async function loadStaticData({context}) {
 }
 function menu() {
   const data = useLoaderData();
-  console.log(data);
   const navigate = useNavigate();
   const isInitialRender = useRef(true);
 
@@ -70,16 +66,7 @@ function menu() {
       console.error('Resy widget is not available.');
     }
   };
-  const handleLinkClick = (e, linkValue) => {
-    e.preventDefault(); // Prevent default anchor behavior
-    const target = document.querySelector(linkValue);
-    if (target) {
-      window.scrollTo({
-        top: target.offsetTop - 220, // Adjust offset as needed
-        behavior: 'smooth',
-      });
-    }
-  };
+
   function organizeMenuItems(data) {
     const result = [];
     let currentArray = [];
@@ -105,7 +92,6 @@ function menu() {
     data.staticData.content.references.nodes,
   );
   useEffect(() => {
-    console.log('useeffect first', location);
     gsap.registerPlugin(ScrollTrigger);
     navigate(location.pathname, {replace: true});
     // Wait for content to be ready
@@ -113,36 +99,13 @@ function menu() {
       // Kill any existing ScrollTriggers first
       ScrollTrigger.getAll().forEach((st) => st.kill());
 
-      // Room size animations
-      gsap.utils.toArray('.room').forEach((room) => {
-        gsap.fromTo(
-          room,
-          {width: '100px', height: '100px'},
-          {
-            width: '75px',
-            height: '75px',
-            scrollTrigger: {
-              trigger: roomsHeaderRef.current,
-              start: '15% 20%',
-              end: '45% 20%',
-              toggleActions: 'play none none reverse',
-              scrub: true,
-              onEnterBack: () => setCurrentSection(null),
-              immediateRender: false,
-            },
-          },
-        );
-      });
-
       // Section tracking
       gsap.utils.toArray('.section').forEach((section) => {
-        console.log(section);
         const sectionId = section.id;
         // Find the corresponding node in data
         const node = data?.staticData.content?.references?.nodes.find(
           (n) => n?.link?.value === sectionId,
         );
-        console.log(node);
         if (!node) {
           return;
         }
@@ -157,22 +120,6 @@ function menu() {
           immediateRender: false,
         });
       });
-
-      // Header border animation
-      gsap.fromTo(
-        roomsHeaderRef.current,
-        {borderBottom: '1px solid #FFFAE1'},
-        {
-          borderBottom: '1px solid #DCB243',
-          scrollTrigger: {
-            trigger: roomsHeaderRef.current,
-            start: '15% 20%',
-            end: '15% 20%',
-            toggleActions: 'play none none reverse',
-            immediateRender: false,
-          },
-        },
-      );
 
       // Force a refresh after initialization
       ScrollTrigger.refresh();
@@ -192,7 +139,6 @@ function menu() {
   useEffect(() => {
     if (isInitialRender.current) {
       isInitialRender.current = false; // Skip first render
-      console.log('locay', location);
       return;
     }
 
@@ -201,7 +147,7 @@ function menu() {
         const target = document.querySelector(location.hash);
         if (target) {
           window.scrollTo({
-            top: target.offsetTop - 200,
+            top: target.offsetTop - 300,
             behavior: 'smooth',
           });
         }
@@ -219,22 +165,13 @@ function menu() {
     data?.staticData.content?.references?.nodes?.filter(
       (node) => node?.link?.value,
     )?.length || 0;
-  console.log(organizedMenuItems);
   return (
     <SmoothScroll>
       <div
-        className="p-14 flex justify-center w-full"
-        style={{backgroundColor: '#DCB243'}}
-      >
-        <Link to={'/'} className="responsive-logo">
-          <RedRoomLogo></RedRoomLogo>
-        </Link>
-      </div>
-      <div
         ref={roomsHeaderRef}
-        className="flex gap-8 w-full px-8 sticky hide-scrollbar top-[0px] bg-white py-[18px] z-20 overflow-x-scroll"
+        className="flex gap-8 w-full px-8 sticky hide-scrollbar top-[100px]  py-[18px] z-20 overflow-x-scroll border-b-1 border-b-[#DCB243]"
         style={{
-          paddingLeft: `max((100vw - ${nodesWithLinks * 132}px) / 2, 0px)`,
+          paddingLeft: `max((100vw - ${nodesWithLinks * 132}px) / 2, 20px)`,
           backgroundColor: '#FFFAE1',
         }}
       >
@@ -249,7 +186,7 @@ function menu() {
                 <div
                   className={`${
                     currentSection == item?.link?.value ? 'border-2' : ''
-                  } border-[#DCB243] h-[100px] w-[100px] p-0.5 rounded-full room`}
+                  } border-[#DCB243] h-[75px] w-[75px] p-0.5 rounded-full room`}
                 >
                   <div className=" rounded-full w-full h-full overflow-hidden ">
                     <Image
@@ -282,7 +219,7 @@ function menu() {
       </div>
 
       <div
-        className="flex flex-col items-center gap-[120px] pt-[120px] pb-[500px]"
+        className="flex flex-col items-center gap-[120px] pt-[120px] pb-[200px]"
         style={{
           color: 'black',
           backgroundColor: '#FFFAE1',
@@ -334,6 +271,7 @@ function menu() {
           </div>
         ))}
       </div>
+      <FooterComponent instagram></FooterComponent>
     </SmoothScroll>
   );
 }

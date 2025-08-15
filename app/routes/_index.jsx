@@ -5,67 +5,25 @@ import {Image, Money, getSeoMeta} from '@shopify/hydrogen';
 import RedRoomLogo from '~/components/RedRoomLogo';
 import RestaurantModal from '~/components/RestaurantModal';
 import AnimatedButton from '~/components/AnimatedButton';
-/**
- * @type {MetaFunction}
- */
-
+import FooterComponent from '~/components/FooterComponent';
+import {createStaticDataLoader} from '~/components/functions/loadStaticData';
+import {HOME_QUERY} from '~/components/query/homeQuery';
+import StoreInfo from '~/components/StoreInfo';
+import RoomCard from '~/components/RoomCard';
+import useIsMobile from '~/components/functions/isMobile';
+import HomePageMobile from '~/components/mobile/HomePageMobile';
 /**
  * @param {LoaderFunctionArgs} args
  */
-export async function loader(args) {
-  // Start fetching non-critical data without blocking time to first byte
-  const deferredData = loadDeferredData(args);
+export const loader = createStaticDataLoader(HOME_QUERY);
 
-  // Await the critical data required to render initial state of the page
-  const criticalData = await loadCriticalData(args);
-
-  return defer({...deferredData, ...criticalData});
-}
 export const meta = ({data}) => {
-  // pass your SEO object to getSeoMeta()
   return getSeoMeta({
-    title: 'Red Room Bar - Snack, Sip, and Shop! ',
-    description:
-      "An intimate cocktail lounge serving expertly crafted drinks and bar snacks in a warm, inviting space—where you can also browse a selection of gifts, home décor, and objets d’art.",
-    // image: data.staticData.seo?.reference.image?.reference?.image.url,
+    title: data?.staticData?.seo?.reference?.title?.value,
+    description: data?.staticData?.seo?.reference?.description?.value,
+    image: data?.staticData?.seo?.reference?.image?.reference?.image?.url,
   });
 };
-
-/**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
- * @param {LoaderFunctionArgs}
- */
-async function loadCriticalData({context}) {
-  const [{collections}] = await Promise.all([
-    context.storefront.query(FEATURED_COLLECTION_QUERY),
-    // Add other queries here, so that they are loaded in parallel
-  ]);
-
-  return {
-    featuredCollection: collections.nodes[0],
-  };
-}
-
-/**
- * Load data for rendering content below the fold. This data is deferred and will be
- * fetched after the initial page load. If it's unavailable, the page should still 200.
- * Make sure to not throw any errors here, as it will cause the page to 500.
- * @param {LoaderFunctionArgs}
- */
-function loadDeferredData({context}) {
-  const recommendedProducts = context.storefront
-    .query(RECOMMENDED_PRODUCTS_QUERY)
-    .catch((error) => {
-      // Log query errors, but don't throw them so the page can still render
-      console.error(error);
-      return null;
-    });
-
-  return {
-    recommendedProducts,
-  };
-}
 
 export default function Homepage() {
   const [email, setEmail] = useState('');
@@ -75,6 +33,15 @@ export default function Homepage() {
     isSubmitted: false,
     isError: false,
   });
+
+  /** @type {LoaderReturnData} */
+  const {staticData, isMobile} = useLoaderData();
+  const isMobileActive = useIsMobile(isMobile);
+
+  // If mobile, render the mobile version
+  if (isMobileActive) {
+    return <HomePageMobile staticData={staticData} />;
+  }
   const url = 'https://printempsnewyork.activehosted.com/proc.php?jsonp=true';
 
   // NOTE • Valid Email checker
@@ -106,7 +73,7 @@ export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
   return (
-    <div className="background">
+    <div className="">
       <RestaurantModal
         setOpenModal={setModalOpen}
         openModal={modalOpen}
@@ -114,7 +81,7 @@ export default function Homepage() {
         link={'https://resy.com/cities/new-york-ny/venues/red-room-bar'}
         api_key={'MfrYLpfKWLBWL77fTAsmkZqB9gqZdW64'}
       ></RestaurantModal>
-      <div className="main-area">
+      <div className="main-area bg-[#DCB243] py-20">
         <div className="responsive-icon">
           <svg
             id="Layer_1"
@@ -175,67 +142,93 @@ export default function Homepage() {
           />
         </div>
       </div>
-      <div className="footer-container">
-        <div className="above-footer">
-          <a
-            href="https://urlgeni.us/instagram/theredroombar"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="https://cdn.shopify.com/s/files/1/0918/8635/4743/files/F_BLandingPages_IG_Colors-04.png?v=1741379913"
-              alt="Instagram Logo"
-              width={80}
+      <div className="w-full flex flex-col items-center justify-center h-[200px] text-center my-6">
+        <p className="w-[450px] p-standard-medium-desktop text-black-2">
+          {staticData.about_sub.value}
+        </p>
+      </div>
+      <div className="flex gap-2 w-full overflow-y-hidden hide-scrollbar h-[550px] no-overscroll px-8">
+        {staticData.about_options.references.nodes.map((item, index) => (
+          <div key={item.id} id={item.header.value} className="flex-1">
+            <RoomCard
+              header={item.header.value}
+              sub={item.sub?.value}
+              button_text={item.button_text.value}
+              image={item.image.reference.image}
+              link={item.link?.value}
             />
-          </a>
-          <p className="moderat-bold sign-up-text" style={{color: '#FFFAE1'}}>
-            Red Room Bar is part of Printemps new york, For more information
-            sign up for our newsletter
-          </p>
-        </div>
+          </div>
+        ))}
+      </div>
 
-        <div className="footer-area">
-          <p
-            className="moderat-bold"
-            style={{fontSize: '14px', color: 'black', marginRight: '8px'}}
-          >
-            {state.isSubmitted ? 'Merci!' : 'Sign up for our newsletter'}
+      <div className="h-[500px] bg-white-2 border-y-1 border-y-white-4 flex">
+        <div
+          className="flex-1 rounded-br-[300px]"
+          style={{
+            backgroundSize: 'cover', // Ensures the image covers the entire container
+            backgroundPosition: 'center', // Centers the image within the container
+            backgroundRepeat: 'no-repeat', // Prevents the image from repeating
+            backgroundImage: `url(${staticData.find_us_image.reference.image.url})`,
+          }}
+        ></div>
+        <div className="flex-1 flex-col flex justify-center items-center gap-6 text-center">
+          <h2 className="h2-desktop w-[220px]">
+            {staticData.find_us_title.value}
+          </h2>
+          <p className="w-[450px] p-standard-medium-desktop text-black-2">
+            {staticData.find_us_sub.value}
           </p>
-          {state.isSubmitted ? (
-            <p
-              className="moderat-bold"
-              style={{fontSize: '14px', color: 'black', marginRight: '8px'}}
-            >
-              Check your email for updates
-            </p>
-          ) : (
-            <input
-              value={email}
-              placeholder="Enter email address"
-              onChange={(e) => setEmail(e.target.value)}
-              className="moderat-bold footer-input bg-white"
-              style={{fontSize: '12px'}}
-            ></input>
-          )}
-          {state.isSubmitted ? (
-            <p></p>
-          ) : (
-            <button
-              className="footer-button"
-              onClick={handleSubmit}
-              disabled={!validEmail.test(email)}
-              style={{cursor: !validEmail.test(email) ? 'auto' : 'pointer'}}
-            >
-              <p
-                className="moderat-bold"
-                style={{fontSize: '12px', color: 'white'}}
-              >
-                Submit
-              </p>
-            </button>
-          )}
+          <AnimatedButton
+            h={'42px'}
+            w={'339px'}
+            text={staticData.find_us_button.reference.button_text.value}
+            bgColor={staticData.find_us_button.reference.color.value}
+            hoverColor={staticData.find_us_button.reference.hover_color.value}
+            clickURL={staticData.find_us_button.reference?.link.value}
+          />
         </div>
       </div>
+
+      <div className="w-full flex flex-col items-center justify-center h-[120px] text-center my-12">
+        <h2 className="h2-desktop">{staticData.title_header.value}</h2>
+        <p className="w-[450px] p-standard-medium-desktop text-black-2">
+          {staticData.title_sub.value}
+        </p>
+      </div>
+      <div className="flex gap-4 px-6 mb-10">
+        {staticData.title_images.references.nodes.map((item, index) => (
+          <div key={index} className="overflow-hidden rounded-xl h-[450px]">
+            <Image data={item.image} className="w-full h-full object-cover">
+              {/* your content here */}
+            </Image>
+          </div>
+        ))}
+      </div>
+      {/* <StoreInfo data={staticData.icons} bgColor={'#AF4145'}></StoreInfo> */}
+
+      <div className="overflow-hidden w-full h-[300px]">
+        <Image
+          data={staticData.filler_image?.reference.image}
+          className="w-full h-full object-cover"
+        ></Image>
+      </div>
+      <div className="py-10 border-y-1 border-white-4 my-14 bg-white-2">
+        <p className="h2-desktop text-center">
+          {staticData.as_seen_header?.value}
+        </p>
+        <div className="pt-12 flex gap-10 items-center overflow-x-auto py-4 justify-center">
+          {staticData.as_seen_images?.references.nodes.map((item, index) => (
+            <div key={index} className="h-10 flex-shrink-0">
+              <Image
+                data={item.image}
+                className="h-full w-auto object-contain"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <FooterComponent></FooterComponent>
     </div>
   );
 }
