@@ -129,7 +129,7 @@ function Press() {
               header={item.header.value}
               sub={item.sub.value}
               content_sub={item.content_sub.value}
-              content_header={item.content_header.value}
+              content_header={item.content_header?.value}
             />
           ))}
         </div>

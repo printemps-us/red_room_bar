@@ -23,27 +23,25 @@ function ImageSectionMobile({
           backgroundImage: `url(${image.url})`,
         }}
       />
-             <div className="flex flex-col justify-center items-center gap-6 p-6">
-         <h2 className="h2-mobile w-full text-center">
-           {h1}
-         </h2>
-         <div className="flex flex-col gap-4 w-full">
-           <div className="flex flex-row justify-between text-black-2">
-             <div className="flex-1 p-small-regular-mobile">
-               <FormattedText text={sub} />
-             </div>
-             {hours && (
-               <div className="flex-1 text-right p-small-regular-mobile">
-                 <FormattedText text={hours} />
-               </div>
-             )}
-           </div>
-           {sub2 && (
-             <div className="w-full p-small-regular-mobile text-black-2">
-               {sub2}
-             </div>
-           )}
-         </div>
+      <div className="flex flex-col justify-center items-center gap-6 pb-12 p-6">
+        <h2 className="h2-mobile w-full text-center">{h1}</h2>
+        <div className="flex flex-col gap-4 w-full">
+          <div className="flex flex-row justify-between text-black-2">
+            <div className="flex-1 p-small-regular-mobile">
+              <FormattedText text={sub} />
+            </div>
+            {hours && (
+              <div className="flex-1 text-right p-small-regular-mobile">
+                <FormattedText text={hours} />
+              </div>
+            )}
+          </div>
+          {sub2 && (
+            <div className="w-full p-small-regular-mobile text-black-2">
+              {sub2}
+            </div>
+          )}
+        </div>
         {buttonText && (
           <AnimatedButton
             h={'48px'}
@@ -59,4 +57,4 @@ function ImageSectionMobile({
   );
 }
 
-export default ImageSectionMobile; 
+export default ImageSectionMobile;

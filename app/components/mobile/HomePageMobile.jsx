@@ -4,6 +4,7 @@ import AnimatedButton from '../AnimatedButton';
 import RestaurantModal from '../RestaurantModal';
 import RoomCard from '../RoomCard';
 import FooterMobile from './FooterMobile';
+import RedRoomLogo from '~/components/RedRoomLogo';
 
 function HomePageMobile({staticData}) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,49 +21,18 @@ function HomePageMobile({staticData}) {
 
       {/* Hero Section */}
       <div className="bg-[#DCB243] flex flex-col items-center gap-2 py-16 px-4">
-        <Image
-          className="logo"
-          src={
-            'https://cdn.shopify.com/s/files/1/0581/1011/5943/files/MaisonPasser.svg?v=1737053887'
-          }
-          width={'300px'}
-          sizes="(min-width: 35em) 60vw, 70vw"
-          alt="Maison Passerelle Logo"
-        />
-        <p
-          className="moderat-bold text-center text-sm"
-          style={{color: '#fffae1'}}
-        >
-          ONE WALL STREET, NEW YORK, NEW YORK
+        <div className='w-[80vw] mb-8'>
+          <RedRoomLogo></RedRoomLogo>
+        </div>
+        <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+          HOURS
         </p>
-        <div>
-          <p
-            className="moderat-bold text-center text-sm"
-            style={{color: '#fffae1'}}
-          >
-            SUNDAY - MONDAY
-          </p>
-          <p
-            className="moderat-bold text-center text-sm"
-            style={{color: '#fffae1'}}
-          >
-            5:00PM - 9:00PM
-          </p>
-        </div>
-        <div>
-          <p
-            className="moderat-bold text-center text-sm"
-            style={{color: '#fffae1'}}
-          >
-            TUESDAY - SATURDAY
-          </p>
-          <p
-            className="moderat-bold text-center text-sm"
-            style={{color: '#fffae1'}}
-          >
-            5:00PM - 10:00PM
-          </p>
-        </div>
+        <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+          SUNDAY - MONDAY: 10AM-9PM
+        </p>
+        <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+          TUESDAY - SATURDAY: 10AM-11PM
+        </p>
 
         <div className="mt-12 w-full flex flex-col gap-3 justify-center items-center">
           <AnimatedButton

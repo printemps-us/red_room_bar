@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import logo from '../../assets/favicon.png'
 function FriendTileMobile({header, sub, content_header, content_sub}) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -17,9 +17,9 @@ function FriendTileMobile({header, sub, content_header, content_sub}) {
       >
         {/* Logo */}
         <div className='flex gap-4'>
-          {/* <div className="flex-shrink-0">
-            <img src={MP} alt="MP logo" className="w-10 h-10" />
-          </div> */}
+          <div className="flex-shrink-0">
+            <img src={logo} alt="MP logo" className="w-8 h-8" />
+          </div>
           <div className="flex flex-col text-left">
             <span className="p-large-mobile uppercase text-black">
               {header}

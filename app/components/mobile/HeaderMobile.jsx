@@ -8,6 +8,7 @@ import Plus from '~/assets/Plus.svg';
 import Minus from '~/assets/Minus.svg';
 import CloseIcon from '~/assets/CloseIcon.svg';
 import gsap from 'gsap';
+import RedRoomLogo from '../RedRoomLogo';
 
 function HeaderMobile({data, pathname}) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -131,20 +132,9 @@ function HeaderMobile({data, pathname}) {
             showDetails ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <Link to="/" onClick={handleMenuLinkClick}>
-            <Image
-              src="https://cdn.shopify.com/s/files/1/0581/1011/5943/files/MaisonPasser.svg?v=1737053887"
-              width={200}
-              sizes="(min-width: 40em) 180px, 360px"
-              alt="Maison Passerelle Logo"
-            />
+          <Link className='w-[200px]' to="/" onClick={handleMenuLinkClick}>
+            <RedRoomLogo></RedRoomLogo>
           </Link>
-
-          <div className="mt-1 ml-1">
-            <p className="moderat-bold text-xs" style={{color: '#fffae1'}}>
-              ONE WALL STREET, NEW YORK, NEW YORK
-            </p>
-          </div>
         </div>
 
         {/* Mobile Menu Button */}
@@ -187,22 +177,11 @@ function HeaderMobile({data, pathname}) {
           onTouchEnd={onTouchEnd}
         >
           {/* Menu Header */}
-          <div className="flex justify-between items-center p-6 border-b border-[#fffae1] border-opacity-20">
-            <div className="flex flex-col">
-              <Link to="/">
-                <Image
-                  src="https://cdn.shopify.com/s/files/1/0581/1011/5943/files/MaisonPasser.svg?v=1737053887"
-                  width={180}
-                  sizes="180px"
-                  alt="Maison Passerelle Logo"
-                />
+          <div className="flex items-center p-6 border-b border-[#fffae1] border-opacity-20">
+            <div className="flex flex-col flex-1 items-center">
+              <Link className='w-[175px]' to="/">
+                <RedRoomLogo></RedRoomLogo>
               </Link>
-              <p
-                className="moderat-bold text-[10px] mt-1"
-                style={{color: '#fffae1'}}
-              >
-                ONE WALL STREET, NEW YORK, NEW YORK
-              </p>
             </div>
             <button
               onClick={toggleMenu}
@@ -251,7 +230,7 @@ function HeaderMobile({data, pathname}) {
                       <Link
                         key={`${item?.text?.value}_mobile`}
                         to={item?.url?.value}
-                        className="block text-[#fffae1] text-opacity-80 text-base pl-4 py-3 hover:text-opacity-100 transition-opacity touch-manipulation"
+                        className="moderat-bold block text-[#fffae1] text-opacity-80 text-base pl-4 py-3 hover:text-opacity-100 transition-opacity touch-manipulation"
                         onClick={handleMenuLinkClick}
                       >
                         {item?.text?.value}

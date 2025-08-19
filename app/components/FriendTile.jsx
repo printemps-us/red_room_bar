@@ -1,6 +1,7 @@
 import React, {useRef} from 'react';
 import gsap from 'gsap';
 import RedRoomLogo from './RedRoomLogo';
+import logo from '../assets/favicon.png'
 function FriendTile({
   header,
   sub,
@@ -32,11 +33,11 @@ function FriendTile({
         className={` rounded-xl bg-[#DCB243] flex-1 flex p-6 gap-3`}
       >
         <div>
-          {/* <img
-            src={MP}
+          <img
+            src={logo}
             alt="P logo"
             className={`${is_mobile ? 'w-10 h-10' : 'w-14 h-14'}`}
-          ></img> */}
+          ></img>
         </div>
         <div className={`flex-1 ${is_mobile ? 'pt-0' : 'pt-2'}`}>
           <div className="flex flex-col">
@@ -58,7 +59,7 @@ function FriendTile({
           <div
             ref={containerRef}
             className={`flex flex-col gap-2 ${
-              is_mobile ? 'ml-[-40px]' : 'ml-[-55px]'
+              is_mobile ? 'ml-[-40px]' : 'ml-[-66px]'
             } h-0 overflow-hidden`}
           >
             <p
