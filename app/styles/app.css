@@ -21,10 +21,6 @@
   --color-light: #fff;
 }
 
-img {
-  border-radius: 12px;
-}
-
 .background {
   background-color: #DCB243;
   height: 100vh;

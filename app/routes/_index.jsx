@@ -195,9 +195,9 @@ export default function Homepage() {
           {staticData.title_sub.value}
         </p>
       </div>
-      <div className="flex gap-4 px-6 mb-10">
+      <div className="flex gap-4 px-6 mb-10 w-full">
         {staticData.title_images.references.nodes.map((item, index) => (
-          <div key={index} className="overflow-hidden rounded-xl h-[450px]">
+          <div key={index} className="overflow-hidden flex-1 rounded-xl h-[450px]">
             <Image data={item.image} className="w-full h-full object-cover">
               {/* your content here */}
             </Image>

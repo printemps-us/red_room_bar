@@ -40,6 +40,7 @@ export default async function handleRequest(
       'https://widgets.resy.com', // Allow framing from Resy
       // Add any other domains you need to allow framing from
     ],
+    mediaSrc: ["'self'", 'https://theredroombar.myshopify.com/'],
     connectSrc: [
       'https://eu2-api.eng.bloomreach.com',
       'https://www.googletagmanager.com',

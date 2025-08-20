@@ -78,9 +78,9 @@ function HeaderComponent({data, isMobile, pathname}) {
         <RestaurantModal
           setOpenModal={setModalOpen}
           openModal={modalOpen}
-          venue_id={'87094'}
-          link={'https://resy.com/cities/new-york-ny/venues/maison-passerelle'}
-          api_key={'bJMvYfY5EA6goX7ncWUkx9PMjXdA5v66'}
+          venue_id={'87093'}
+          link={'https://resy.com/cities/new-york-ny/venues/red-room-bar'}
+          api_key={'MfrYLpfKWLBWL77fTAsmkZqB9gqZdW64'}
         />
         <HeaderMobile data={data} pathname={pathname} />
       </>
@@ -92,9 +92,9 @@ function HeaderComponent({data, isMobile, pathname}) {
       <RestaurantModal
         setOpenModal={setModalOpen}
         openModal={modalOpen}
-        venue_id={'87094'}
-        link={'https://resy.com/cities/new-york-ny/venues/maison-passerelle'}
-        api_key={'bJMvYfY5EA6goX7ncWUkx9PMjXdA5v66'}
+        venue_id={'87093'}
+        link={'https://resy.com/cities/new-york-ny/venues/red-room-bar'}
+        api_key={'MfrYLpfKWLBWL77fTAsmkZqB9gqZdW64'}
       ></RestaurantModal>
       <div className="w-full bg-[#DCB243] flex justify-between sticky top-0 h-[100px] z-100">
         <div
@@ -139,7 +139,7 @@ function HeaderComponent({data, isMobile, pathname}) {
           </Link>
           <AnimatedButton
             text="RESERVE A TABLE"
-            clickURL="https://resy.com/cities/new-york-ny/venues/maison-passerelle"
+            // clickURL="https://resy.com/cities/new-york-ny/venues/maison-passerelle"
             onClick={() => setModalOpen(true)}
             bgColor="#fffae1"
             textColor="#DCB243"

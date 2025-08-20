@@ -132,7 +132,7 @@ function HeaderMobile({data, pathname}) {
             showDetails ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <Link className='w-[200px]' to="/" onClick={handleMenuLinkClick}>
+          <Link className="w-[200px]" to="/" onClick={handleMenuLinkClick}>
             <RedRoomLogo></RedRoomLogo>
           </Link>
         </div>
@@ -179,7 +179,7 @@ function HeaderMobile({data, pathname}) {
           {/* Menu Header */}
           <div className="flex items-center p-6 border-b border-[#fffae1] border-opacity-20">
             <div className="flex flex-col flex-1 items-center">
-              <Link className='w-[175px]' to="/">
+              <Link className="w-[175px]" to="/">
                 <RedRoomLogo></RedRoomLogo>
               </Link>
             </div>
@@ -226,16 +226,33 @@ function HeaderMobile({data, pathname}) {
 
                 {activeAccordion === 'about' && (
                   <div className="pb-4 space-y-3 animate-fadeIn">
-                    {data?.links?.references.nodes.map((item, index) => (
-                      <Link
-                        key={`${item?.text?.value}_mobile`}
-                        to={item?.url?.value}
-                        className="moderat-bold block text-[#fffae1] text-opacity-80 text-base pl-4 py-3 hover:text-opacity-100 transition-opacity touch-manipulation"
-                        onClick={handleMenuLinkClick}
-                      >
-                        {item?.text?.value}
-                      </Link>
-                    ))}
+                    {data?.links?.references.nodes.map((item) => {
+                      const url = item?.url?.value;
+                      const isExternal =
+                        url &&
+                        !url.startsWith('/')
+                      return isExternal ? (
+                        <a
+                          key={`${item?.text?.value}_mobile`}
+                          href={url}
+                          className="moderat-bold block text-[#fffae1] text-opacity-80 text-base pl-4 py-3 hover:text-opacity-100 transition-opacity touch-manipulation"
+                          onClick={handleMenuLinkClick}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {item?.text?.value}
+                        </a>
+                      ) : (
+                        <Link
+                          key={`${item?.text?.value}_mobile`}
+                          to={url}
+                          className="moderat-bold block text-[#fffae1] text-opacity-80 text-base pl-4 py-3 hover:text-opacity-100 transition-opacity touch-manipulation"
+                          onClick={handleMenuLinkClick}
+                        >
+                          {item?.text?.value}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>

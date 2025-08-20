@@ -54,7 +54,7 @@ function FooterMobile({instagram = false}) {
           </a>
         )}
         <p className="moderat-bold text-center text-sm leading-relaxed" style={{color: '#fffae1'}}>
-          Maison Passerelle is part of Printemps new york, For more information
+          Red Room Bar is part of Printemps new york, For more information
           sign up for our newsletter
         </p>
       </div>

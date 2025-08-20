@@ -48,13 +48,26 @@ query StaticPageContent {
         value
       }
       content_block_2_image: field(key: "content_block_2_image") {
+        
         reference {
+        __typename
           ... on MediaImage {
             image {
               url
               altText
             }
           }
+          ... on Video {
+                    sources {
+                      url
+                      mimeType
+                      format
+                    }
+                    previewImage {
+                      url
+                      altText
+                    }
+                  }
         }
       }
       tradition_image: field(key: "tradition_image") {
