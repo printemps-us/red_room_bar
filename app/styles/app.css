@@ -11,6 +11,14 @@
   text-transform: uppercase;
 }
 
+body {
+  font-family: "Urbanist", serif;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  margin: 0;
+}
+
 :root {
   --aside-width: 400px;
   --cart-aside-summary-height-with-discount: 300px;

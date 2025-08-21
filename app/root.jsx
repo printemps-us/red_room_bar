@@ -58,6 +58,16 @@ export function links() {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
+    {
+      rel: 'prefetch', // Preload critical CSS
+      href: tailwindCss,
+      as: 'style',
+    },
+    {
+      rel: 'preload', // Preload critical CSS
+      href: appStyles,
+      as: 'style',
+    },
     {rel: 'icon', type: 'image/png', href: '/favicon.png?v=2'},
   ];
 }
@@ -170,6 +180,14 @@ export function Layout({children}) {
         <link rel="stylesheet" href={tailwindCss}></link>
         <link rel="stylesheet" href={resetStyles}></link>
         <link rel="stylesheet" href={appStyles}></link>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/eiq4ccg.css"
+        ></link>
         <Meta />
         <Links />
       </head>

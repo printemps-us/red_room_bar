@@ -101,9 +101,10 @@ function HeaderComponent({data, isMobile, pathname}) {
           className={`p-4 transition-all duration-500 ease-in-out flex flex-col justify-center  ${
             showDetails ? 'opacity-100 h-full' : 'opacity-0 max-h-0'
           }`}
+          style={{ overflow: 'visible' }}
         >
           <Link to="/">
-            <div className='w-[200px]'>
+            <div className='w-[200px] flex items-center justify-center overflow-visible' style={{ height: 'auto', minHeight: '0' }}>
               <RedRoomLogo></RedRoomLogo>
             </div>
           </Link>
