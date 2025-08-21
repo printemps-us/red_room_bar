@@ -1,12 +1,10 @@
 import React from 'react';
 import {Image} from '@shopify/hydrogen';
 function MediaComponent({data}) {
-  console.log(data);
+  console.log(data, 'data');
   if (data?.__typename == 'Video') {
-    console.log('test');
-    console.log('Rendering video');
     return (
-      <div className="overflow-hidden rounded-xl">
+      <div className='overflow-hidden rounded-xl'>
         <video
           autoPlay
           muted
@@ -24,13 +22,11 @@ function MediaComponent({data}) {
     );
   }
   return (
-    <div className='overflow-hidden rounded-xl h-full'>
-      <Image
-        data={data.image}
-        sizes="(min-width: 45em) 50vw, 100vw"
-        className="w-full h-full object-cover"
-      ></Image>
-    </div>
+    <Image
+      data={data.image}
+      sizes="(min-width: 45em) 50vw, 100vw"
+      className="w-full h-full object-cover"
+    ></Image>
   );
 }
 

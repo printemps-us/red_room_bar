@@ -71,13 +71,25 @@ query StaticPageContent {
         }
       }
       tradition_image: field(key: "tradition_image") {
-        reference {
+       reference {
+        __typename
           ... on MediaImage {
             image {
               url
               altText
             }
           }
+          ... on Video {
+                    sources {
+                      url
+                      mimeType
+                      format
+                    }
+                    previewImage {
+                      url
+                      altText
+                    }
+                  }
         }
       }
       chef_quote: field(key: "chef_quote") {

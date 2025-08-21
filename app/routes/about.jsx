@@ -51,7 +51,7 @@ function About() {
   if (isMobileActive) {
     return <AboutMobile staticData={staticData} />;
   }
-
+  console.log(staticData, 'staticData');
   return (
     <div>
       <div className="overflow-hidden w-full h-[360px]">
