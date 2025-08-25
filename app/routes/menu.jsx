@@ -7,6 +7,9 @@ import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import SmoothScroll from '~/components/SmoothScroll';
 import FooterComponent from '~/components/FooterComponent';
+import useIsMobile from '~/components/functions/isMobile';
+import FooterMobile from '~/components/mobile/FooterMobile';
+
 export async function loader(args) {
   const staticData = await loadStaticData(args);
 
@@ -38,6 +41,8 @@ async function loadStaticData({context}) {
 function menu() {
   const data = useLoaderData();
   const navigate = useNavigate();
+  const isMobileActive = useIsMobile(false);
+
   const isInitialRender = useRef(true);
 
   const [width, setWidth] = useState(
@@ -271,7 +276,13 @@ function menu() {
           </div>
         ))}
       </div>
-      <FooterComponent instagram></FooterComponent>
+      {!isMobileActive ? (
+        <FooterComponent></FooterComponent>
+      ) : (
+        <div className="mt-[-2px]">
+          <FooterMobile></FooterMobile>
+        </div>
+      )}
     </SmoothScroll>
   );
 }

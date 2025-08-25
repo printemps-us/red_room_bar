@@ -12,6 +12,7 @@ import StoreInfo from '~/components/StoreInfo';
 import RoomCard from '~/components/RoomCard';
 import useIsMobile from '~/components/functions/isMobile';
 import HomePageMobile from '~/components/mobile/HomePageMobile';
+import SmoothScroll from '~/components/SmoothScroll';
 /**
  * @param {LoaderFunctionArgs} args
  */
@@ -73,7 +74,7 @@ export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
   return (
-    <div className="">
+    <SmoothScroll>
       <RestaurantModal
         setOpenModal={setModalOpen}
         openModal={modalOpen}
@@ -197,7 +198,10 @@ export default function Homepage() {
       </div>
       <div className="flex gap-4 px-6 mb-10 w-full">
         {staticData.title_images.references.nodes.map((item, index) => (
-          <div key={index} className="overflow-hidden flex-1 rounded-xl h-[450px]">
+          <div
+            key={index}
+            className="overflow-hidden flex-1 rounded-xl h-[450px]"
+          >
             <Image data={item.image} className="w-full h-full object-cover">
               {/* your content here */}
             </Image>
@@ -229,7 +233,7 @@ export default function Homepage() {
       </div>
 
       <FooterComponent></FooterComponent>
-    </div>
+    </SmoothScroll>
   );
 }
 
