@@ -16,6 +16,8 @@ import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
 import {PageLayout} from '~/components/PageLayout';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
+import {HEADER_DATA_QUERY} from '~/components/query/headerQuery';
+import {checkIfMobile} from '~/components/functions/isMobile';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -56,6 +58,16 @@ export function links() {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
+    {
+      rel: 'prefetch', // Preload critical CSS
+      href: tailwindCss,
+      as: 'style',
+    },
+    {
+      rel: 'preload', // Preload critical CSS
+      href: appStyles,
+      as: 'style',
+    },
     {rel: 'icon', type: 'image/png', href: '/favicon.png?v=2'},
   ];
 }
@@ -69,12 +81,14 @@ export async function loader(args) {
 
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
-
+  const userAgent = args.request.headers.get('user-agent');
+  const isMobile = checkIfMobile(userAgent);
   const {storefront, env} = args.context;
 
   return defer({
     ...deferredData,
     ...criticalData,
+    isMobile,
     publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
     shop: getShopAnalytics({
       storefront,
@@ -96,20 +110,29 @@ export async function loader(args) {
  * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  * @param {LoaderFunctionArgs}
  */
-async function loadCriticalData({context}) {
+async function loadCriticalData({context, request}) {
   const {storefront} = context;
 
   const [header] = await Promise.all([
-    storefront.query(HEADER_QUERY, {
-      cache: storefront.CacheLong(),
+    storefront.query(HEADER_DATA_QUERY, {
+      cache: storefront.CacheNone(),
       variables: {
         headerMenuHandle: 'main-menu', // Adjust to your header menu handle
       },
     }),
-    // Add other queries here, so that they are loaded in parallel
+    // Add other queries here
   ]);
 
-  return {header};
+  const url = new URL(request.url);
+  const pathname = url.pathname;
+  const userAgent = request.headers.get('user-agent');
+  const isMobile = checkIfMobile(userAgent);
+
+  return {
+    header,
+    pathname,
+    isMobile,
+  };
 }
 
 /**
@@ -157,6 +180,14 @@ export function Layout({children}) {
         <link rel="stylesheet" href={tailwindCss}></link>
         <link rel="stylesheet" href={resetStyles}></link>
         <link rel="stylesheet" href={appStyles}></link>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/eiq4ccg.css"
+        ></link>
         <Meta />
         <Links />
       </head>

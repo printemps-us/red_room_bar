@@ -6,6 +6,16 @@ function RedRoomLogo() {
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 531.24 129.91"
+      preserveAspectRatio="xMidYMid meet"
+      style={{ 
+        width: '100%',
+        height: 'auto',
+        minHeight: '0', 
+        minWidth: '0',
+        maxHeight: 'none',
+        overflow: 'visible',
+        display: 'block'
+      }}
     >
       <defs>
         <style>{`
