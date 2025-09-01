@@ -28,10 +28,7 @@ function HomePageMobile({staticData}) {
           HOURS
         </p>
         <p className="moderat-bold" style={{color: '#FFFAE1'}}>
-          SUNDAY - MONDAY: 10AM-9PM
-        </p>
-        <p className="moderat-bold" style={{color: '#FFFAE1'}}>
-          TUESDAY - SATURDAY: 10AM-11PM
+          MONDAY - SUNDAY: 11AM-11PM
         </p>
 
         <div className="mt-12 w-full flex flex-col gap-3 justify-center items-center">
