@@ -107,10 +107,7 @@ export default function Homepage() {
             HOURS
           </p>
           <p className="moderat-bold" style={{color: '#FFFAE1'}}>
-            SUNDAY - MONDAY: 10AM-9PM
-          </p>
-          <p className="moderat-bold" style={{color: '#FFFAE1'}}>
-            TUESDAY - SATURDAY: 10AM-11PM
+            MONDAY - SUNDAY: 11AM-11PM
           </p>
           <span
             className="moderat-bold mt-1"
