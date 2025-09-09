@@ -50,26 +50,6 @@ export default function Homepage() {
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
   );
 
-  const handleSubmit = (e) => {
-    console.log('tirrger');
-    exponea.identify(
-      {email_id: email.toLowerCase()},
-      {
-        email: email.toLowerCase(),
-        data_source: 'restaurant',
-      },
-    );
-    exponea.track('consent', {
-      category: 'email',
-      valid_until: 'unlimited',
-      action: 'accept',
-      data_source: 'restaurant',
-    });
-    setState({
-      isWaiting: false,
-      isSubmitted: true,
-    });
-  };
 
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
