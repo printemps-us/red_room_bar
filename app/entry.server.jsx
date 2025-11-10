@@ -64,6 +64,8 @@ export default async function handleRequest(
       'https://a.klaviyo.com',
       'https://www.google-analytics.com',
       'https://formspree.io/',
+      'https://analytics.google.com',
+      'https://stats.g.doubleclick.net',
     ],
   });
 
