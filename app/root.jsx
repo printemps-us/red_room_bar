@@ -17,6 +17,7 @@ import tailwindCss from './styles/tailwind.css?url';
 import {PageLayout} from '~/components/PageLayout';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 import {HEADER_DATA_QUERY} from '~/components/query/headerQuery';
+import {POPUP_QUERY} from './components/query/popUp';
 import {checkIfMobile} from '~/components/functions/isMobile';
 
 /**
@@ -113,12 +114,15 @@ export async function loader(args) {
 async function loadCriticalData({context, request}) {
   const {storefront} = context;
 
-  const [header] = await Promise.all([
+  const [header, popupData] = await Promise.all([
     storefront.query(HEADER_DATA_QUERY, {
       cache: storefront.CacheNone(),
       variables: {
         headerMenuHandle: 'main-menu', // Adjust to your header menu handle
       },
+    }),
+    storefront.query(POPUP_QUERY, {
+      cache: storefront.CacheNone(),
     }),
     // Add other queries here
   ]);
@@ -130,6 +134,7 @@ async function loadCriticalData({context, request}) {
 
   return {
     header,
+    popupData,
     pathname,
     isMobile,
   };
