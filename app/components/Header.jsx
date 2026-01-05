@@ -96,7 +96,7 @@ function HeaderComponent({data, isMobile, pathname, popupData}) {
           link={'https://resy.com/cities/new-york-ny/venues/red-room-bar'}
           api_key={'MfrYLpfKWLBWL77fTAsmkZqB9gqZdW64'}
         />
-        {!seen && showNewsletter && popupData.show.value == 'true' && (
+        {!seen && showNewsletter && popupData?.show?.value == 'true' && (
           <Popup
             data={popupData}
             onClose={() => setShowNewsletter(false)}
@@ -117,7 +117,7 @@ function HeaderComponent({data, isMobile, pathname, popupData}) {
         link={'https://resy.com/cities/new-york-ny/venues/red-room-bar'}
         api_key={'MfrYLpfKWLBWL77fTAsmkZqB9gqZdW64'}
       ></RestaurantModal>
-      {!seen && showNewsletter && popupData.show.value == 'true' && (
+      {!seen && showNewsletter && popupData?.show?.value == 'true' && (
         <Popup data={popupData} onClose={() => setShowNewsletter(false)} />
       )}
       <div className="w-full bg-[#DCB243] flex justify-between sticky top-0 h-[100px] z-100">
