@@ -80,9 +80,9 @@ function HeaderComponent({data, isMobile, pathname, popupData}) {
     }, 200);
   };
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = (value) => {
     clearTimeout(leaveTimeout);
-    setIsHover(true);
+    setIsHover(value);
   };
 
   // If mobile, render the mobile header
@@ -139,12 +139,12 @@ function HeaderComponent({data, isMobile, pathname, popupData}) {
         <div className="flex gap-12 items-center px-4">
           <div
             className="text-[#fffae1] moderat-bold cursor-pointer h-full flex items-center gap-1"
-            onMouseEnter={handleMouseEnter}
+            onMouseEnter={() => handleMouseEnter('about')}
             onMouseLeave={handleMouseLeave}
             ref={hoverRef}
           >
             <span>ABOUT</span>
-            <Carrot rotated={isHover} />
+            <Carrot rotated={isHover == 'about'} />
           </div>
           <Link
             to="/location"
@@ -152,12 +152,15 @@ function HeaderComponent({data, isMobile, pathname, popupData}) {
           >
             LOCATION
           </Link>
-          <Link
-            to="/menu"
-            className="text-[#fffae1] moderat-bold cursor-pointer"
+          <div
+            className="text-[#fffae1] moderat-bold cursor-pointer h-full flex items-center gap-1"
+            onMouseEnter={() => handleMouseEnter('menu')}
+            onMouseLeave={handleMouseLeave}
+            ref={hoverRef}
           >
-            MENU
-          </Link>
+            <span>MENU</span>
+            <Carrot rotated={isHover == 'menu'} />
+          </div>
           <Link
             to="/contact-us"
             className="text-[#fffae1] moderat-bold cursor-pointer"

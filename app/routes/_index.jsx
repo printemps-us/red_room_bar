@@ -13,6 +13,7 @@ import RoomCard from '~/components/RoomCard';
 import useIsMobile from '~/components/functions/isMobile';
 import HomePageMobile from '~/components/mobile/HomePageMobile';
 import SmoothScroll from '~/components/SmoothScroll';
+import MenuModal from '~/components/MenuModal';
 /**
  * @param {LoaderFunctionArgs} args
  */
@@ -29,6 +30,7 @@ export const meta = ({data}) => {
 export default function Homepage() {
   const [email, setEmail] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
+  const [menuModalOpen, setMenuModalOpen] = useState(false);
   const [state, setState] = useState({
     isWaiting: false,
     isSubmitted: false,
@@ -50,7 +52,6 @@ export default function Homepage() {
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
   );
 
-
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
   return (
@@ -62,6 +63,11 @@ export default function Homepage() {
         link={'https://resy.com/cities/new-york-ny/venues/red-room-bar'}
         api_key={'MfrYLpfKWLBWL77fTAsmkZqB9gqZdW64'}
       ></RestaurantModal>
+
+      <MenuModal
+        setOpenModal={setMenuModalOpen}
+        openModal={menuModalOpen}
+      ></MenuModal>
       <div className="main-area bg-[#DCB243] py-20">
         <div className="responsive-icon">
           <svg
@@ -111,7 +117,7 @@ export default function Homepage() {
             text={'View Menu'}
             bgColor={'white'}
             hoverColor={'white'}
-            clickURL={'/menu'}
+            onClick={() => setMenuModalOpen(true)}
             textColor="#DCB243"
             h="42px"
             w="90%"
