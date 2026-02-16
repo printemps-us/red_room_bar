@@ -43,7 +43,7 @@ function MenuModal({
                 h={isMobile ? '42px' : '42px'}
                 w={isMobile ? '225px' : '339px'}
               />
-              <AnimatedButton
+              {/* <AnimatedButton
                 text={'Restaurant Week Menu'}
                 bgColor={'black'}
                 hoverColor={'black'}
@@ -51,7 +51,7 @@ function MenuModal({
                 h={isMobile ? '42px' : '42px'}
                 w={isMobile ? '225px' : '339px'}
                 clickURL={'/restaurant-week-menu'}
-              />
+              /> */}
             </div>
           </div>
         </div>
