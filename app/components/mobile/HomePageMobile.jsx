@@ -21,14 +21,24 @@ function HomePageMobile({staticData}) {
 
       {/* Hero Section */}
       <div className="bg-[#DCB243] flex flex-col items-center gap-2 py-16 px-4">
-        <div className='w-[80vw] mb-8'>
+        <div className="w-[80vw] mb-8">
           <RedRoomLogo></RedRoomLogo>
         </div>
         <p className="moderat-bold" style={{color: '#FFFAE1'}}>
-          HOURS
+          Drinks Service Only
         </p>
         <p className="moderat-bold" style={{color: '#FFFAE1'}}>
-          MONDAY - SUNDAY: 11AM-11PM
+          Walk-ins Welcome:
+        </p>
+        <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+          11AM - 3PM
+        </p>
+        <div className="h-3"></div>
+        <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+          Dinner & Happy Hour:
+        </p>
+        <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+          3PM - 11PM
         </p>
 
         <div className="mt-12 w-full flex flex-col gap-3 justify-center items-center">

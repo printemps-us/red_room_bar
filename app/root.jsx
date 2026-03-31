@@ -60,12 +60,25 @@ export function links() {
       href: 'https://shop.app',
     },
     {
-      rel: 'prefetch', // Preload critical CSS
+      rel: 'preconnect',
+      href: 'https://fonts.googleapis.com',
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.gstatic.com',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://use.typekit.net',
+    },
+    {
+      rel: 'preload',
       href: tailwindCss,
       as: 'style',
     },
     {
-      rel: 'preload', // Preload critical CSS
+      rel: 'preload',
       href: appStyles,
       as: 'style',
     },
