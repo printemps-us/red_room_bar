@@ -88,15 +88,25 @@ export default function Homepage() {
         <div className="responsive-logo mt-6">
           <RedRoomLogo></RedRoomLogo>
         </div>
-        <div className="flex flex-col items-center mt-10">
-          <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+        <div className="flex flex-col items-center mt-5">
+          {/* <p className="moderat-bold" style={{color: '#FFFAE1'}}>
             HOURS
+          </p> */}
+          <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+            Drinks Service Only • Walk-ins Welcome:
           </p>
           <p className="moderat-bold" style={{color: '#FFFAE1'}}>
-            MONDAY - SUNDAY: 11AM-11PM
+            11AM - 3PM
+          </p>
+          <div className='h-3'></div>
+          <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+            Dinner & Happy Hour:
+          </p>
+          <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+            3PM - 11PM
           </p>
           <span
-            className="moderat-bold mt-1"
+            className="moderat-bold mt-5"
             style={{color: '#FFFAE1', fontSize: 12}}
           >
             {'(ENTER AT ONE WALL ST AND BROADWAY)'}
