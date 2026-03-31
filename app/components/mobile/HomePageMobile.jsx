@@ -25,7 +25,10 @@ function HomePageMobile({staticData}) {
           <RedRoomLogo></RedRoomLogo>
         </div>
         <p className="moderat-bold" style={{color: '#FFFAE1'}}>
-          Drinks Service Only • Walk-ins Welcome:
+          Drinks Service Only
+        </p>
+        <p className="moderat-bold" style={{color: '#FFFAE1'}}>
+          Walk-ins Welcome:
         </p>
         <p className="moderat-bold" style={{color: '#FFFAE1'}}>
           11AM - 3PM
