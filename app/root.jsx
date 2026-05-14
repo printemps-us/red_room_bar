@@ -19,6 +19,7 @@ import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 import {HEADER_DATA_QUERY} from '~/components/query/headerQuery';
 import {POPUP_QUERY} from './components/query/popUp';
 import {checkIfMobile} from '~/components/functions/isMobile';
+import { redirect } from '@shopify/remix-oxygen';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
