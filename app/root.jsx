@@ -92,7 +92,7 @@ export function links() {
 export async function loader(args) {
   // Start fetching non-critical data without blocking time to first byte
   const deferredData = loadDeferredData(args);
-
+  throw redirect('https://us.printemps.com/visit/red-room-bar', 301);
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
   const userAgent = args.request.headers.get('user-agent');
