@@ -19,6 +19,7 @@ import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 import {HEADER_DATA_QUERY} from '~/components/query/headerQuery';
 import {POPUP_QUERY} from './components/query/popUp';
 import {checkIfMobile} from '~/components/functions/isMobile';
+import { redirect } from '@shopify/remix-oxygen';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -92,7 +93,7 @@ export function links() {
 export async function loader(args) {
   // Start fetching non-critical data without blocking time to first byte
   const deferredData = loadDeferredData(args);
-
+  throw redirect('https://us.printemps.com/visit/red-room-bar', 301);
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
   const userAgent = args.request.headers.get('user-agent');
